@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View hr.attendance tree -->
+    <record id="view_hr_attendance_tree" model="ir.ui.view">
+        <field name="name">view.hr.attendance.tree</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='employee_id']"
+                   position="after" >
+                <field name="check_in_status"/>
+                <field name="check_out_status"/>
+                <field name="late_time"/>
+                <field name="early_time"/>
+                <field name="status_leave"/>
+                <field name="department_id"/>
+                <field name="employee_shift_id"/>
+                <field name="current_shift_day"/>
+                <field name="current_shift_att_date"/>
+                <!-- <field name="designation"/> -->
+                <field name="is_absent"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- View hr.attendance form -->
+    <record id="view_hr_attendance_form_inherit" model="ir.ui.view">
+        <field name="name">view.hr.attendance.form_inherit</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='overtime_hours']"
+                   position="after">
+                <field name="department_id" readonly="1"/>
+                <field name="is_rest_day" readonly="0"/>
+<!--                <p invisible ="check_in_status == 'restday' and not is_rest_day" class="text-danger" colspan="2" >I guess you forgot to update data! Please click gears on left.</p>-->
+            </xpath>
+
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='employee_id']" position="after">
+                <field name="employee_shift_id" readonly="0"/>
+            </xpath>
+
+            <xpath expr="//sheet/group[1]" position="before">
+                <field name="avatar_1920" widget="image" class="oe_avatar" invisible="not employee_id"/>
+                <div class="d-flex justify-content-between align-items-center ">
+                    <div class="d-flex pb-2 align-items-center">
+                        <div>
+                            <i class="fa fa-calendar-check-o   pb-1  fa-3x text-primary" title="Attendance"/>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">Attendance Adjustments</h3>
+                            <h6 class="card-subtitle  text-muted">Manage missed check-ins and check-outs
+                                effectively
+                            </h6>
+                        </div>
+
+                    </div>
+                    <div>
+                    </div>
+                </div>
+                <separator string="Employee Data" colspan="4"/>
+            </xpath>
+
+
+            <xpath expr="//field[@name='check_out']"
+                   position="after">
+                <div class="d-flex float-end justify-content-end">
+                    <button string="Update Data"
+                            type="object"
+                            name="action_shift_now"
+                            icon="fa-cogs"
+                            class="btn-sm  btn-link"/>
+                </div>
+            </xpath>
+
+
+            <xpath expr="//form/sheet/group/group[1]"
+                   position="after">
+                <separator string="Attendance Details" colspan="4"/>
+
+                <group>
+                    <field name="check_in_status" readonly="1"/>
+                    <field name="check_out_status" readonly="1"/>
+
+                    <!--<field name="status_leave"/>-->
+                </group>
+                <group>
+                    <field name="late_time" readonly="1"/>
+                    <field name="early_time" readonly="1"/>
+
+
+                    <!--<field name="current_shift_att_date"/>-->
+                    <!-- <field name="designation"/> -->
+                    <!--<field name="is_absent"/>-->
+                </group>
+
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="bulk_shift_change_view_form" model="ir.ui.view">
+        <field name="name">bulk.shift.change.view.form</field>
+        <field name="model">bulk.shift.change</field>
+        <field name="arch" type="xml">
+            <form string="Change Employee Shift">
+                <group>
+                    <field name="employee_ids" widget="many2many_tags"
+                        options="{'no_create': True}" />
+                    <field name="new_shift_id" options="{'no_create': True}" />
+                </group>
+                <footer>
+                    <button name="action_apply" string="Apply"
+                        type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary"
+                        special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Standalone action: also appears in the Action menu of the
+         Employees list view (binding_model_id + binding_view_types)
+         when one or more employees are selected, so changing a whole
+         team's shift is a couple of clicks from the list itself. -->
+    <record id="bulk_shift_change_action" model="ir.actions.act_window">
+        <field name="name">Change Employee Shift</field>
+        <field name="res_model">bulk.shift.change</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="hr.model_hr_employee" />
+        <field name="binding_view_types">list</field>
+    </record>
+
+    <!-- Also reachable from a dedicated menu, for changing shifts
+         without first navigating to the Employees list. -->
+    <menuitem id="bulk_shift_change_menu"
+        name="Change Employee Shift"
+        parent="biometric_device_details_menu"
+        action="bulk_shift_change_action"
+        groups="hr_zk_attendance.groups_attn_biometric_device_rights"
+        sequence="22" />
+</odoo>

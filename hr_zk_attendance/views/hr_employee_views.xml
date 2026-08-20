@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--    Inherited hr employee for adding new field-->
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="name">hr.employee.view.form.inherit.hr.zk.attendance
+        </field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="create_new_employee"
+                    string="New Employee in ZK Machine"
+                    type="object"
+                    groups="base.group_system"
+                />
+
+            </xpath>
+            <xpath expr="//page[@name='hr_settings']//field[@name='user_id']"
+                position="after">
+                <field name="device_id_num" />
+            </xpath>
+            <xpath expr="//field[@name='resource_calendar_id']" position="after">
+                <field name="employee_shift_id" />
+                <field name="rest_days_ids"
+                    widget="many2many_tags"
+                    options="{'no_create': True, 'no_open': True, 'no_create_edit': True}"
+                />
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- ir action for creating stock location of employee -->
+
+<!--    <record id="create_stock_location" model="ir.actions.server">-->
+<!--        <field name="name">Create Stock Location</field>-->
+<!--        <field name="model_id" ref="model_hr_employee" />-->
+<!--        <field name="binding_model_id" ref="model_hr_employee" />-->
+<!--        <field name="state">code</field>-->
+<!--        <field name="groups_id" eval="[(4, ref('update_contact_kkn.group_dev_employee_rights'))]"/>-->
+<!--        <field name="code">-->
+<!--            if records:-->
+<!--            action = records.create_employee_stock_location()-->
+<!--        </field>-->
+<!--    </record>-->
+
+
+</odoo>

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_biometric_device_details,access.biometric.device.details,model_biometric_device_details,base.group_user,1,1,1,1
+access_daily_attendance,access.daily.attendance,model_daily_attendance,base.group_user,1,1,1,1
+access_zk_machine_attendance,access.zk.machine.attendance,model_zk_machine_attendance,base.group_user,1,1,1,1
+access_employee_shift_manager,employee_shift_manager,model_employee_shift,hr.group_hr_manager,1,1,1,1
+access_hr_rest_day_manager,hr_rest_day_manager,model_hr_rest_day,base.group_user,1,1,1,1
+access_shift_adjustment,access.shift.adjustment,model_shift_adjustment,base.group_user,1,1,1,1
+access_shift_adjustment_lines,access.shift.adjustment.lines,model_shift_adjustment_lines,base.group_user,1,1,1,1
+access_biometic_machine_data_manager,biometic_machine_data_manager,model_biometic_machine_data,hr_zk_attendance.groups_attn_biometric_data_rights,1,1,1,1
+access_bulk_shift_change,access.bulk.shift.change,model_bulk_shift_change,hr_zk_attendance.groups_attn_biometric_device_rights,1,1,1,1

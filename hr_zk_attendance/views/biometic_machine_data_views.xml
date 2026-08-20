@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View biometic.machine.data View Tree -->
+    <record id="view_biometic_machine_data_tree" model="ir.ui.view">
+        <field name="name">view.biometic.machine.data.tree</field>
+        <field name="model">biometic.machine.data</field>
+        <field name="arch" type="xml">
+            <tree
+                create="false"
+                delete="false"
+            >
+                <field name="name" />
+                <field name="employee_name" />
+                <field name="user_machine_id" />
+                <field name="uid" />
+                <field name="user_id" />
+                <field name="password" />
+                <field name="group_id" />
+                <field name="privilege" />
+                <field name="card" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- View biometic.machine.data form -->
+    <record id="view_biometic_machine_data_form" model="ir.ui.view">
+        <field name="name">view.biometic.machine.data.form</field>
+        <field name="model">biometic.machine.data</field>
+        <field name="arch" type="xml">
+            <form string="Biometic Machine Data">
+
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Name..." />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="employee_name" />
+                        </group>
+                        <group>
+                            <field name="user_machine_id" />
+                            <field name="uid" />
+                            <field name="user_id" />
+                            <field name="password" />
+                            <field name="group_id" />
+                            <field name="privilege" />
+                            <field name="card" />
+
+                        </group>
+
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- View biometic.machine.data search -->
+    <record id="view_biometic_machine_data_search" model="ir.ui.view">
+        <field name="name">view.biometic.machine.data.search</field>
+        <field name="model">biometic.machine.data</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="1" string="Group By">
+                    <filter string="Name" name="name" domain="[]" context="{'group_by':'name'}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action biometic.machine.data -->
+    <record id="action_biometic_machine_data" model="ir.actions.act_window">
+        <field name="name">Biometic Machine Data</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">biometic.machine.data</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                There is no examples click here to add new Biometic Machine Data.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="attendance_machine_data_menu"
+        action="action_biometic_machine_data"
+        parent="biometric_device_details_menu"
+        groups="hr_zk_attendance.groups_attn_biometric_data_rights"
+    />
+
+</odoo>

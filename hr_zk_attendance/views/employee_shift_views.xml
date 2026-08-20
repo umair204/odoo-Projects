@@ -1,0 +1,101 @@
+<odoo>
+    <data>
+
+        <!-- Form View -->
+        <record model="ir.ui.view" id="employee_shift_form_view">
+            <field name="name">Employee Shift Form</field>
+            <field name="model">employee.shift</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar"
+                            statusbar_visible="draft,hr,approved" />
+                        <!-- Submit Button -->
+                        <button name="action_hr_approval" string="Approval" class="btn-primary"
+                            type="object" invisible="state in ('hr', 'approved')" />
+
+                        <!-- HR Reject Button -->
+                        <button name="action_reject" string="Reject" class="btn-primary"
+                            type="object" invisible="state not in ('hr')" />
+                        <!-- Reset To Draft Button -->
+                        <button name="action_draft" string="Reset To Draft"
+                            class="btn-primary" type="object" />
+
+                        <button name="action_approved" string="Approve" class="btn-primary"
+                            type="object" invisible="state not in ('hr')" />
+
+                        <!-- Reset To HR Button -->
+                        <button name="action_hr_approval" string="Reset To HR"
+                            class="btn-primary" type="object" invisible="state not in ('hr')" />
+
+                        <!-- Cancel Button -->
+                        <button name="action_cancel" string="cancel" class="btn-secondary"
+                            type="object" invisible="state in ('draft')" />
+
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" readonly="state != 'draft'" />
+                                <field name="resource_calendar_id" readonly="state != 'draft'" />
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="shift_start" widget='float_time' readonly="state != 'draft'" />
+                                <field name="margin" widget='float_time' readonly="state != 'draft'" />
+                                <field name="present_end" widget='float_time' readonly="1" force_save="True" />
+                                <field name="shift_duration" readonly="state != 'draft'" force_save="True" />
+                                <field name="shift_end" widget='float_time' readonly="1" force_save="True" />
+                            </group>
+                            <group>
+                                <field name="late_end" widget='float_time' readonly="state != 'draft'" />
+                                <field name="short_leave" widget='float_time' readonly="state != 'draft'" />
+                                <field name="shift_type" readonly="state != 'draft'" />
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" />
+                        <field name="activity_ids" widget="mail_activity" />
+                        <field name="message_ids" widget="mail_thread" />
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="employee_shift_tree_view">
+            <field name="name">Shift Employee Tree</field>
+            <field name="model">employee.shift</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" />
+                    <field name="shift_start" widget='float_time' />
+                    <field name="margin" widget='float_time' />
+                    <field name="present_end" widget='float_time' />
+                    <field name="late_end" widget='float_time' />
+                    <field name="short_leave" widget='float_time' />
+                    <field name="shift_end" widget='float_time' />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_new_shift_employee">
+            <field name="name">Shifts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.shift</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create your new shift for employee's Here!
+                </p>
+            </field>
+        </record>
+
+        <menuitem name="Employee Shifts" id="employee_shift_id" parent="hr.menu_config_employee" groups="hr.group_hr_manager" sequence="2" action="action_new_shift_employee" />
+    </data>
+</odoo>

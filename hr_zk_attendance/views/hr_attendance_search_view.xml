@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="hr_attendance_view_inherits_filters" model="ir.ui.view">
+        <field name="name">hr.attendance.view.inherit.new.filters</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//group//filter[@name='employee']" position="after">
+                <filter name="group_department" string="Department" domain="[]" context="{'group_by': 'department_id'}" />
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="attendance_rights_category" model="ir.module.category">
+        <field name="name">Attendance Custom Rights</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="groups_attn_biometric_menu_rights" model="res.groups">
+        <field name="name">Attendance Biometric Menu Rights</field>
+        <field name="category_id" ref="hr_zk_attendance.attendance_rights_category" />
+    </record>
+    <record id="groups_attn_biometric_device_rights" model="res.groups">
+        <field name="name">Attendance Biometric Machine Rights</field>
+        <field name="category_id" ref="hr_zk_attendance.attendance_rights_category" />
+    </record>
+    <record id="groups_attn_biometric_data_rights" model="res.groups">
+        <field name="name">Attendance Biometric Data Rights</field>
+        <field name="category_id" ref="hr_zk_attendance.attendance_rights_category" />
+    </record>
+    <record id="groups_shift_adjmnt_data_rights" model="res.groups">
+        <field name="name">Attendance Shift Adjustment Rights</field>
+        <field name="category_id" ref="hr_zk_attendance.attendance_rights_category" />
+    </record>
+</odoo>

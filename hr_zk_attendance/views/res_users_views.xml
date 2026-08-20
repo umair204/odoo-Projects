@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <!-- Form View -->
+        <record id="hr_zk_view_res_users_form_inherit" model="ir.ui.view">
+            <field name="name">hr.zk.view.res.users.form.inherit.attendance</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="hr.res_users_view_form_profile"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" string="All Attendances" name="action_open_all_attendances"
+                         icon="fa-calendar"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

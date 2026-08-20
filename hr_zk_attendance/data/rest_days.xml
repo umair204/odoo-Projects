@@ -1,0 +1,25 @@
+<odoo>
+    <data noupdate="1">
+        <record id="day_monday" model="hr.rest_day">
+            <field name="name">Monday</field>
+        </record>
+        <record id="day_tuesday" model="hr.rest_day">
+            <field name="name">Tuesday</field>
+        </record>
+        <record id="day_wednesday" model="hr.rest_day">
+            <field name="name">Wednesday</field>
+        </record>
+        <record id="day_thursday" model="hr.rest_day">
+            <field name="name">Thursday</field>
+        </record>
+        <record id="day_friday" model="hr.rest_day">
+            <field name="name">Friday</field>
+        </record>
+        <record id="day_saturday" model="hr.rest_day">
+            <field name="name">Saturday</field>
+        </record>
+        <record id="day_sunday" model="hr.rest_day">
+            <field name="name">Sunday</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- View hr.contract tree -->
+    <record id="view_hr_contract_tree" model="ir.ui.view">
+        <field name="name">view.hr.contract.tree</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='contract_type_id']"
+                position="after"
+            >
+                <field name="employee_shift_id" />
+                <field name="shift_start" />
+                <field name="shift_end" />
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- View hr.contract form -->
+    <record id="view_hr_contract_form" model="ir.ui.view">
+        <field name="name">view.hr.contract.form</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='contract_type_id']"
+                position="after">
+                <field name="employee_shift_id" />
+                <field name="shift_start" />
+                <field name="shift_end" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
