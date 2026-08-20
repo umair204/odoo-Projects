@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_so_mo_tracking" model="ir.actions.report">
+        <field name="name">SO Manufacturing Tracking</field>
+        <field name="model">sale.order.mo.tracking.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">so_mo_tracking.report_so_mo_tracking_document</field>
+        <field name="report_file">so_mo_tracking.report_so_mo_tracking_document</field>
+        <field name="print_report_name">'SO Manufacturing Tracking'</field>
+    </record>
+
+</odoo>

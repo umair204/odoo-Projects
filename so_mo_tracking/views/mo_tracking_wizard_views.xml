@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_so_mo_tracking_wizard_form" model="ir.ui.view">
+        <field name="name">sale.order.mo.tracking.wizard.form</field>
+        <field name="model">sale.order.mo.tracking.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Manufacturing Order Tracking">
+                <group>
+                    <group string="Look up a specific SO">
+                        <field name="so_id"
+                               options="{'no_create': True}"
+                               placeholder="Select a Sale Order..."/>
+                        <field name="so_name" placeholder="e.g. S12907"/>
+                    </group>
+                    <group string="Or filter by Delivery Date range">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+
+                <field name="not_found" invisible="1"/>
+                <field name="searched" invisible="1"/>
+
+                <div class="alert alert-warning" role="alert"
+                     invisible="not not_found">
+                    No Sale Orders / Manufacturing Orders found matching your
+                    search. Check the SO number, or widen the delivery date
+                    range.
+                </div>
+
+                <field name="line_ids" invisible="not line_ids">
+                    <tree create="false" edit="false" delete="false"
+                          decoration-bf="is_header"
+                          decoration-info="is_header"
+                          decoration-success="state == 'done'"
+                          decoration-muted="state in ('draft','cancel')"
+                          decoration-warning="state not in ('done','draft','cancel') and not is_header">
+                        <field name="sequence" column_invisible="1"/>
+                        <field name="is_header" column_invisible="1"/>
+                        <field name="final_product" string="Final Product / SO Section"/>
+                        <field name="stage" string="Stage"/>
+                        <field name="mo_name" string="MO"/>
+                        <field name="product_id" string="Component / Product"/>
+                        <field name="state_label" string="Status"/>
+                        <field name="qty_producing" string="Qty Producing"/>
+                        <field name="product_qty" string="Qty To Produce"/>
+                        <field name="leftover" string="Leftover"/>
+                        <field name="entry_date" string="Entry Date"/>
+                        <field name="end_date" string="End Date"/>
+                        <field name="so_name" column_invisible="1"/>
+                        <field name="state" column_invisible="1"/>
+                    </tree>
+                </field>
+
+                <footer>
+                    <button name="action_search" type="object"
+                            string="Search" class="btn-primary"/>
+                    <button name="action_print_report" type="object"
+                            string="Print PDF" icon="fa-file-pdf-o"
+                            class="btn-secondary"
+                            invisible="not line_ids"/>
+                    <button name="action_print_xlsx" type="object"
+                            string="Print XLSX" icon="fa-file-excel-o"
+                            class="btn-secondary"
+                            invisible="not line_ids"/>
+                    <button string="Close" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_so_mo_tracking_wizard" model="ir.actions.act_window">
+        <field name="name">SO Manufacturing Tracking</field>
+        <field name="res_model">sale.order.mo.tracking.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_so_mo_tracking"
+              name="SO Manufacturing Tracking"
+              parent="mrp.menu_mrp_root"
+              action="action_so_mo_tracking_wizard"
+              sequence="100"/>
+
+</odoo>

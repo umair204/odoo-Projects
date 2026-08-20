@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_mo_tracking_button" model="ir.ui.view">
+        <field name="name">sale.order.form.mo.tracking.button</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button name="action_view_mo_tracking" type="object"
+                        class="oe_stat_button" icon="fa-industry"
+                        invisible="mo_tracking_count == 0">
+                    <field name="mo_tracking_count" widget="statinfo"
+                           string="MO Tracking"/>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_quotation_tree_product_unitprice" model="ir.ui.view">
+        <field name="name">sale.order.list.product.unitprice</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="list_product_id" optional="show"/>
+                <field name="list_unit_price" optional="show"/>
+            </field>
+        </field>
+    </record>
+</odoo>
