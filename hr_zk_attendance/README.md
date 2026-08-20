@@ -95,4 +95,4 @@ AGPL-3
 
 ## Author
 
-Umair Abbas — Rainbow Printing Solutions
+Umair Abbas
