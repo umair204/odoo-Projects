@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Adds "Add to Dispatch List" next to Print/Actions in the toolbar
+         that appears once you tick one or more rows (same place as the
+         native "Create Invoices" button). Covers the Quotations list. -->
+    <record id="view_quotation_tree_dispatch_list_button" model="ir.ui.view">
+        <field name="name">sale.order.quotation.tree.dispatch.list.button</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_add_to_dispatch_list" type="object"
+                        string="Add to Dispatch List"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Same button on the Sales Orders list. -->
+    <record id="view_order_tree_dispatch_list_button" model="ir.ui.view">
+        <field name="name">sale.order.tree.dispatch.list.button</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_add_to_dispatch_list" type="object"
+                        string="Add to Dispatch List"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

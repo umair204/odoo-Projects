@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- PDF report: kept unbound (no binding_model_id) - it's now only ever
+         triggered internally, via the "Dispatch Plan Report" / "Dispatch Plan
+         Report (XLSX)" server actions below, which pull orders from the
+         current user's Dispatch List (not from whatever happens to be
+         selected) and clear the list afterward.
+         NOTE: binding_model_id is explicitly cleared (not just omitted) so
+         that upgrading from an older version of this module - which DID set
+         it - actually removes the old binding instead of silently keeping
+         it (Odoo only updates fields present in the record). binding_type
+         is left alone since it's a required field and doesn't matter once
+         binding_model_id is empty. -->
+    <record id="action_report_dispatch_plan" model="ir.actions.report">
+        <field name="name">Dispatch Plan Report</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">dispatch_plan_report.report_dispatch_plan_document</field>
+        <field name="report_file">dispatch_plan_report.report_dispatch_plan_document</field>
+        <field name="print_report_name">'Dispatch Plan'</field>
+        <field name="binding_model_id" eval="False"/>
+    </record>
+
+    <!-- XLSX report: same idea. -->
+    <record id="action_report_dispatch_plan_xlsx" model="ir.actions.report">
+        <field name="name">Dispatch Plan Report (XLSX)</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">xlsx</field>
+        <field name="report_name">dispatch_plan_report.report_dispatch_plan_xlsx</field>
+        <field name="report_file">dispatch_plan_report.report_dispatch_plan_xlsx</field>
+        <field name="print_report_name">'Dispatch Plan'</field>
+        <field name="binding_model_id" eval="False"/>
+    </record>
+
+    <!-- These are what actually show up in the "Print" dropdown now. They
+         ignore whichever rows are ticked and instead print+clear the
+         current user's standing Dispatch List. -->
+    <record id="action_print_dispatch_list_pdf" model="ir.actions.server">
+        <field name="name">Dispatch Plan Report</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="state">code</field>
+        <field name="code">action = env['dispatch.plan.cart.line'].action_print_all_pdf()</field>
+    </record>
+
+    <record id="action_print_dispatch_list_xlsx" model="ir.actions.server">
+        <field name="name">Dispatch Plan Report (XLSX)</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="state">code</field>
+        <field name="code">action = env['dispatch.plan.cart.line'].action_print_all_xlsx()</field>
+    </record>
+
+    <template id="report_dispatch_plan_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 class="text-center">Dispatch Plan</h2>
+                    <p class="text-center">
+                        <span t-esc="datetime.date.today()" t-options="{'widget': 'date'}"/>
+                    </p>
+
+                    <table class="table table-bordered" style="font-size:10px;">
+                        <thead>
+                            <tr style="background-color:#f2f2f2;">
+                                <th>#</th>
+                                <th>Customer PO#</th>
+                                <th>Promise Date</th>
+                                <th>SO #</th>
+                                <th>Product</th>
+                                <th>Customer Name</th>
+                                <th>Order Qty</th>
+                                <th>Dispatch Qty</th>
+                                <th>Remaining Qty</th>
+                                <th>Current Dispatch</th>
+                                <th>Dispatcher Name/Sign</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="not lines">
+                                <tr>
+                                    <td colspan="11" class="text-center">No order lines found for the selected Sales Orders.</td>
+                                </tr>
+                            </t>
+                            <t t-foreach="lines" t-as="line">
+                                <tr>
+                                    <td t-esc="line_index + 1"/>
+                                    <td t-esc="line['customer_po']"/>
+                                    <td>
+                                        <span t-esc="line['promise_date']" t-options="{'widget': 'date'}"/>
+                                    </td>
+                                    <td t-esc="line['so_number']"/>
+                                    <td t-esc="line['product']"/>
+                                    <td t-esc="line['customer']"/>
+                                    <td class="text-right">
+                                        <span t-esc="line['order_qty']" t-options="{'widget': 'float', 'precision': 2}"/> <span t-esc="line['uom']"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="line['dispatch_qty']" t-options="{'widget': 'float', 'precision': 2}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="line['remaining_qty']" t-options="{'widget': 'float', 'precision': 2}"/>
+                                    </td>
+                                    <td t-esc="line['current_dispatch']"/>
+                                    <td></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <br/>
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:50%;">Sales Signatures: ______________________</td>
+                            <td style="width:50%; text-align:right;">
+                                Dispatch Signature: ______________________
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+
+</odoo>

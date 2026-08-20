@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_dispatch_plan_cart_line_tree" model="ir.ui.view">
+        <field name="name">dispatch.plan.cart.line.tree</field>
+        <field name="model">dispatch.plan.cart.line</field>
+        <field name="arch" type="xml">
+            <tree string="Dispatch List" create="false" edit="false">
+                <header>
+                    <button name="action_print_pdf" type="object" string="Print PDF" class="btn-primary"/>
+                    <button name="action_print_xlsx" type="object" string="Print XLSX" class="btn-primary"/>
+                    <button name="action_clear_my_list" type="object" string="Clear My List" class="btn-secondary" confirm="Remove ALL orders from your Dispatch List?"/>
+                </header>
+                <field name="so_number"/>
+                <field name="client_order_ref"/>
+                <field name="commitment_date"/>
+                <field name="partner_id"/>
+                <field name="amount_total" widget="monetary"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="added_on"/>
+                <field name="user_id" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_dispatch_plan_cart" model="ir.actions.act_window">
+        <field name="name">Dispatch List</field>
+        <field name="res_model">dispatch.plan.cart.line</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('user_id', '=', uid)]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Your Dispatch List is empty.
+            </p>
+            <p>
+                Go to Sales Orders, select one or more orders (tick the checkboxes -
+                this works even across different pages or filters), then use
+                Actions -> "Add to Dispatch List". Come back here to review your
+                selection and print the Dispatch Plan (PDF or XLSX).
+            </p>
+        </field>
+    </record>
+
+    <!-- Under Sales > Reporting, next to Sales / Salespersons / Products / Customers -->
+    <menuitem id="menu_dispatch_plan_cart"
+              name="Dispatch List"
+              parent="sale.menu_sale_report"
+              action="action_dispatch_plan_cart"
+              sequence="100"/>
+
+</odoo>

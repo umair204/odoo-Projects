@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Each user only sees / manages their own Dispatch List entries. -->
+    <record id="dispatch_plan_cart_line_rule_own" model="ir.rule">
+        <field name="name">Dispatch Plan Cart Line: own only</field>
+        <field name="model_id" ref="model_dispatch_plan_cart_line"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+</odoo>
