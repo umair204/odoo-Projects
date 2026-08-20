@@ -1,12 +1,12 @@
 # CRM and NetOps (`crm_netops`)
 
-Odoo 19 module managing the **end-to-end ISP B2B sales process** for KK Networks (PVT) LTD. — from Lead Qualification through Technical Surveys, ROI Approval, and Post-Sale Provisioning.
+Odoo 19 module managing the **end-to-end ISP B2B sales process** — from Lead Qualification through Technical Surveys, ROI Approval, and Post-Sale Provisioning.
 
-> **Note:** This repository contains **documentation only** for this module (process flowchart). The source code is proprietary to KK Networks (PVT) LTD. and is **not published** in this public repository.
+> **Note:** This repository contains **documentation only** for this module (process flowchart). The source code is a paid/commercial module and is **not published** in this public repository.
 
 ## Overview
 
-The module drives the full lifecycle of a corporate/carrier ISP sale in Odoo CRM, connecting Sales, Technical Survey, Sales Operations, CEO Approval, and NetOps/Deployment teams into a single tracked pipeline — from a new lead to a live, billed customer subscription.
+The module drives the full lifecycle of a corporate/carrier ISP sale in Odoo CRM, connecting Sales, Technical Survey, Sales Operations, Approval, and NetOps/Deployment teams into a single tracked pipeline — from a new lead to a live, billed customer subscription.
 
 See [`CRM_NETOPS_Flow.pdf`](./CRM_NETOPS_Flow.pdf) for the full process diagram.
 
@@ -31,10 +31,10 @@ See [`CRM_NETOPS_Flow.pdf`](./CRM_NETOPS_Flow.pdf) for the full process diagram.
 ### 4. Proposal and Negotiation
 - ROI is computed from Price Offered, Business Cost, Deployment Cost, Bandwidth, and MRC Profit — expressed as months-to-breakeven.
 - If ROI ≤ 5, the deal proceeds directly to Progression with **no approval required**.
-- If ROI > 5, it's routed to the CEO Approval stage.
+- If ROI > 5, it's routed to the Approval stage.
 
 ### 5. Approval
-- CEO reviews and decides (email notification to CEO).
+- Reviewer decides on the deal (email notification sent).
 - If approved, moves to Progression.
 - If rejected, returns to Negotiation/Proposal for revision.
 
@@ -55,16 +55,9 @@ See [`CRM_NETOPS_Flow.pdf`](./CRM_NETOPS_Flow.pdf) for the full process diagram.
 - Sale Order is confirmed (auto-confirms the quotation).
 - Subscription is created, closing the process.
 
-## Departments / Roles Involved
-
-- **Inventory / Logistics** — KK Networks (PVT) LTD.
-- **Technical Team (NOC)** — KK Networks (PVT) LTD.
-- **Corporate / Carrier Sales Manager** — KK Networks (PVT) LTD.
-- **Chief Executive Officer** — KK Networks (PVT) LTD.
-
 ## Notifications
 
-The process sends automated email notifications at key checkpoints to ANO Department, CNO Department, the CEO, KAM, and the Accounts Department, keeping all stakeholders synced as a deal moves through the pipeline.
+The process sends automated email notifications at key checkpoints (Technical/NOC team, Approval stage, KAM, Accounts Department) to keep all stakeholders synced as a deal moves through the pipeline.
 
 ## Repository Contents
 
@@ -73,8 +66,4 @@ crm_netops/
 └── CRM_NETOPS_Flow.pdf   # Full process flowchart (source of truth for this document)
 ```
 
-Source code (models, views, wizards, automations implementing this flow) is maintained privately and is not part of this public repository.
-
-## Author
-
-KK Networks Team — KK Networks (PVT) LTD.
+Source code (models, views, wizards, automations implementing this flow) is a paid/commercial module and is not part of this public repository.
